@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'timeline', component: TimelineComponent},
   { path: 'admin', loadChildren: () => import('./pages/admin/admin-routing.module').then(m => m.AdminRoutingModule) },
-  { path: '**', redirectTo: '/home'}
+  { path: '**', redirectTo: '/'}
 ];
 
 @NgModule({
