@@ -1,0 +1,5 @@
+<h1>Lịch sử thay đổi</h1>
+<br />
+<nz-timeline [nzMode]="mode" *ngFor="let item of listTimeline">
+    <nz-timeline-item nzLabel="item.timestamp">{{item.title}}</nz-timeline-item>
+</nz-timeline>

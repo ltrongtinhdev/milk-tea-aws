@@ -1,0 +1,120 @@
+<button (click)="open()" nz-button nzType="primary">
+    <i nz-icon nzType="search"></i>
+    Thêm mới
+</button>
+<nz-table 
+    #basicTable 
+    nzNoResult="Không có dữ liệu"
+    [nzData]="listProduct"
+    nzShowPagination
+    >
+    <thead>
+      <tr>
+        <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th>
+        <th>Tên</th>
+        <th>Sản phẩm</th>
+        <th>Tỷ lệ</th>
+        <th>Thời gian</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td
+            [nzChecked]="setOfCheckedId.has(data._id)"
+            
+            (nzCheckedChange)="onItemChecked(data._id, $event)"
+        ></td>
+        <td>{{ data.fullname }}</td>
+        <td>{{ data.content }}</td>
+        <td>
+            <nz-tag [nzColor]="'gold'">size: {{data.optionSize}}</nz-tag>
+            <nz-tag [nzColor]="'lime'">sugar: {{data.optionSugar}}</nz-tag>
+            <nz-tag [nzColor]="'green'">ice: {{data.optionIce}}</nz-tag>
+        </td>
+        <td>{{ data.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+            <button (click)="edit(data)" nz-button style="width: 5rem" nzType="primary">Sửa</button>
+            <button 
+              nz-button 
+              style="width: 5rem" 
+              nzDanger 
+              nz-popconfirm
+              nzPopconfirmTitle="Bạn có muốn xoá đơn hàng này?"
+              (nzOnConfirm)="confirm(data._id)"
+              (nzOnCancel)="cancel()"
+              nzPopconfirmPlacement="topLeft"
+              nzType="primary">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+<nz-drawer
+      [nzClosable]="false"
+      [nzVisible]="visible"
+      nzPlacement="right"
+      nzTitle="Phần order"
+      (nzOnClose)="close()"
+    >
+      <ng-container *nzDrawerContent>
+        <nz-input-group >
+            <label>Họ và tên</label>
+            <input [(ngModel)]="product.fullname" type="text" nz-input  />
+        </nz-input-group>
+        <br />
+        <nz-input-group >
+            <label>Sản phẩm</label>
+            <input [(ngModel)]="product.content" type="text" nz-input />
+        </nz-input-group>
+        <br />
+        <div nz-row>
+            <div nz-col nzSpan="12">
+                <label>Tỷ lệ đá</label>
+                <nz-radio-group [(ngModel)]="product.optionIce">
+                    <label nz-radio nzValue="0">0</label>
+                    <br />
+                    <label nz-radio nzValue="30">30</label>
+                    <br />
+                    <label nz-radio nzValue="50">50</label>
+                    <br />
+                    <label nz-radio nzValue="70">70</label>
+                    <br />
+                    <label nz-radio nzValue="100">100</label>
+                </nz-radio-group>
+            </div>
+            <div nz-col nzSpan="12">
+                <label>Tỷ lệ đường</label>
+                <nz-radio-group [(ngModel)]="product.optionSugar">
+                    <label nz-radio nzValue="0">0</label>
+                    <br />
+                    <label nz-radio nzValue="30">30</label>
+                    <br />
+                    <label nz-radio nzValue="50">50</label>
+                    <br />
+                    <label nz-radio nzValue="70">70</label>
+                    <br />
+                    <label nz-radio nzValue="100">100</label>
+                </nz-radio-group>
+            </div>
+          </div>
+        <br />
+        <div nz-row>
+            <div nz-col nzSpan="12" nzOffset="6">
+                <label>Loại</label>
+                <nz-radio-group [(ngModel)]="product.optionSize">
+                    <label nz-radio-button nzValue="M">M</label>
+                    <label nz-radio-button nzValue="L">L</label>
+                </nz-radio-group>
+            </div>
+        </div>
+        <br />
+
+        <div nz-row>
+            <div nz-col nzSpan="12" nzOffset="3">
+                <button (click)="save(product)" nz-button style="width: 10rem" nzType="primary">Lưu</button>
+            </div>
+        </div>
+      </ng-container>
+      
+</nz-drawer>

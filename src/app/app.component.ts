@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'milktea';
+  menus: any[] = [
+    { link: '/home', name: 'Home'},
+    { link: '/timeline', name: 'Timeline'}
+  ]
+  isCollapsed = false;
+  constructor() {
+
+  }
 }
