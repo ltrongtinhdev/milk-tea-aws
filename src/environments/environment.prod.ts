@@ -5,5 +5,5 @@ export const environment = {
   DATABASE: 'milktea',
   COLLECTION: '',
   KEY: 'QJ5ORI3BHYpc4aoy0Dx0PTvnnVFwXOQoHc8tec82bd6KfOmwrfwUKK8BeCNdpvpC',
-  API: 'http://34.220.145.52:3333/'
+  API: 'https://milktea-us.herokuapp.com/'
 };
